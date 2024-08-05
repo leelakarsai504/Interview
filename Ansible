@@ -1,13 +1,58 @@
-I would like to run specific set of  tasks only on windows vms with example usecase
+Ansible Strategies : 
 
+Strategies are a way to control play execution on the number of hosts given in a playbook.
+1. Linear stategy : 
+         By default, plays run with a linear strategy, in which all hosts will run each task before any host starts the next task.
 
+             If each task in your playbook must succeed on all hosts before you run the next task, use the linear strategy.
+2. Free statergy : 
+
+Using the free strategy, Ansible uses available forks to execute tasks on each host as quickly as possible. 
+Even if an earlier task is still running on one host, Ansible executes later tasks on other hosts.
+
+- name: "strategy demo"
+  hosts: webserver1,sqlserver1
+  strategy: linear
+  tasks:
+    - name: "first task"
+      apt: name='apache2' state='present'
+    - name: "second task"
+      command: touch /tmp/strategy_task2.txt
+
+1. Fork :
+ The forks settings defines the maximum number of parallel processes Ansible will use to execute the tasks.
+ * It increases the speed of execution and also increases the memory usage
+ Default fork value : 5
+
+use case :
+You have a large no of servers and want to speed up the execution of your playbook by running tasks on multiple server simultaneously 
+
+2.  Serial :  
+      * Runs tasks on a specific set of hosts at a time, in sequence
+      * Wait for all the tasks to complete on the current set of hosts before moving to the next set.
+Use case: 
+      * Useful for rolling updates, where you want to update a subset of hosts at a time (update few servers at time to minimize the downtime)
+Serial:2 
+RUn the tasks on 2 hosts at a time. Wait for all the tasks to complete on the first 2 hosts before moving to the next two hosts
+
+3. Throttle :
+It limits the number of workers for a particular task. It can be set at the block and task level. 
+Use throttle to restrict tasks that may be CPU-intensive or interact with a rate-limiting API:
+
+tasks:
+- command: /path/to/cpu_intensive_command
+  throttle: 1
+use case : 
+    You have a task that consumes a lot of resource (eg : disk, I/O,cpu) and you want to limit the no of instance of this tasks running simultaneously across your inventory
+==========================================================================================================================
+Question2 : I would like to run specific set of  tasks only on windows virtual machines and not on linux VM is it possible?
+ Yes , it is possible to run a specific set of tasks on Windows VM’s .
+You can use When condition with  the ansible_os_family fact to achieve this.
 Here's an example use case:
 
 *Use Case:* Install and configure Microsoft SQL Server on Windows VMs only.
 
 *Ansible Playbook:*
-```
----
 - name: Install and configure MS SQL Server on Windows VMs
   hosts: all
   gather_facts: yes
@@ -26,25 +71,13 @@ Here's an example use case:
           product_id: '{4E768E6F-81E5-4CBA-B7E6-6A8D6A8A37A3}'
           state: present
     when: ansible_os_family == "Windows"
+==============================================================================================
+Question3 : What is dry run (check mode)in ansible and how to run it ?
+ Ansible Dry Run feature, you can execute the playbook without having to actually make changes on the  server. 
+ this enables us to see what changes are going to be made when the playbook is run.
 
-  - name: Configure MS SQL Server
-    block:
-      - name: Enable MS SQL Server service
-        win_service:
-          name: MSSQLSERVER
-          state: started
-          enabled: yes
+ansible-playbook <playbookname> – check
 
-      - name: Set MS SQL Server password
-        win_cmd:
-          cmd: sqlcmd -S localhost -Q "ALTER LOGIN sa WITH PASSWORD = 'P@ssw0rd';"
-    when: ansible_os_family == "Windows"
-```
-*Explanation:*
 
-1. The playbook targets all hosts (`hosts: all`).
-2. Facts are gathered (`gather_facts: yes`) to determine the OS family.
-3. The first task block installs MS SQL Server only on Windows VMs (`when: ansible_os_family == "Windows"`).
-4. The second task block configures MS SQL Server only on Windows VMs (`when: ansible_os_family == "Windows"`).
 
-*Note:* This is just an example and may require modifications to suit your specific requirements. Additionally, the `win_get_url` and `win_package` modules require the `winrm` connection plugin, which is enabled by default on Windows hosts.
+

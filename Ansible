@@ -1,0 +1,50 @@
+I would like to run specific set of  tasks only on windows vms with example usecase
+
+
+Here's an example use case:
+
+*Use Case:* Install and configure Microsoft SQL Server on Windows VMs only.
+
+*Ansible Playbook:*
+```
+---
+- name: Install and configure MS SQL Server on Windows VMs
+  hosts: all
+  gather_facts: yes
+
+  tasks:
+  - name: Install MS SQL Server
+    block:
+      - name: Download MS SQL Server installer
+        win_get_url:
+          url: (link unavailable)
+          dest: C:\Temp\SQLServer2019-SSEI-Dev.exe
+
+      - name: Install MS SQL Server
+        win_package:
+          path: C:\Temp\SQLServer2019-SSEI-Dev.exe
+          product_id: '{4E768E6F-81E5-4CBA-B7E6-6A8D6A8A37A3}'
+          state: present
+    when: ansible_os_family == "Windows"
+
+  - name: Configure MS SQL Server
+    block:
+      - name: Enable MS SQL Server service
+        win_service:
+          name: MSSQLSERVER
+          state: started
+          enabled: yes
+
+      - name: Set MS SQL Server password
+        win_cmd:
+          cmd: sqlcmd -S localhost -Q "ALTER LOGIN sa WITH PASSWORD = 'P@ssw0rd';"
+    when: ansible_os_family == "Windows"
+```
+*Explanation:*
+
+1. The playbook targets all hosts (`hosts: all`).
+2. Facts are gathered (`gather_facts: yes`) to determine the OS family.
+3. The first task block installs MS SQL Server only on Windows VMs (`when: ansible_os_family == "Windows"`).
+4. The second task block configures MS SQL Server only on Windows VMs (`when: ansible_os_family == "Windows"`).
+
+*Note:* This is just an example and may require modifications to suit your specific requirements. Additionally, the `win_get_url` and `win_package` modules require the `winrm` connection plugin, which is enabled by default on Windows hosts.

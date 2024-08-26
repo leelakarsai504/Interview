@@ -1,0 +1,58 @@
+The error you're encountering seems to be related to Git LFS (Large File Storage) failing to download certain assets due to a network issue, specifically a "Temporary failure in name resolution" when trying to connect through a proxy.
+
+Here are steps to troubleshoot and resolve the issue:
+
+### 1. **Check Network Configuration:**
+   - Ensure that the proxy settings are correctly configured. The error suggests that the proxy configuration might have issues, especially with name resolution.
+   - Confirm that the proxy server is accessible and properly resolving domain names. You can test this by trying to resolve the domain names from the server using `nslookup` or `dig` commands:
+     ```sh
+     nslookup git.swf.daimler.com
+     dig git.swf.daimler.com
+     ```
+   - Verify that the credentials in the `http_proxy` and `https_proxy` environment variables are correct and properly escaped. If there are any special characters (like `@`, `\`, `:`) in your password, you may need to URL-encode them.
+
+### 2. **Check Git LFS Installation:**
+   - Ensure that Git LFS is correctly installed and initialized in your repository:
+     ```sh
+     git lfs install
+     ```
+   - Make sure that Git LFS is configured to handle the specific file extensions in your repository:
+     ```sh
+     git lfs track "*.png"
+     ```
+   - You can also try to manually fetch the LFS objects:
+     ```sh
+     git lfs fetch
+     ```
+
+### 3. **Clear Git LFS Cache:**
+   - Sometimes, clearing the Git LFS cache can help:
+     ```sh
+     git lfs prune
+     git lfs checkout
+     ```
+
+### 4. **Retry the Fetch Operation:**
+   - Once the above steps are verified, retry the fetch operation:
+     ```sh
+     bitbake titanium-ui -c fetch
+     ```
+
+### 5. **Review Logs for Further Clues:**
+   - Check the detailed Git LFS logs for more information about the failure:
+     ```sh
+     git lfs logs last
+     ```
+   - Also, review the log file mentioned in the error for any additional details:
+     ```
+     /home/abdeshp/richos1/build/tmp/work/cortexa78c-mbient-linux/titanium-ui/7.14.0+gitAUTOINC+57fca4179a-r0/temp/log.do_fetch.2608393
+     ```
+
+### 6. **Bypass Proxy (If Possible):**
+   - If the proxy is causing issues and you can bypass it, try setting the `http_proxy` and `https_proxy` environment variables to empty strings before running the fetch command:
+     ```sh
+     export http_proxy=""
+     export https_proxy=""
+     ```
+
+If the issue persists, you may need to contact your network administrator to ensure that the proxy is properly configured and functioning as expected.

@@ -1,12 +1,18 @@
-RROR: titanium-ui-7.14.0+gitAUTOINC+57fca4179a-r0 do_fetch: Fetcher failure: Fetch command export PSEUDO_DISABLED=1; export DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/1000/bus"; export https_proxy="http://APAC\kuvikra:Mbrdi12345@proxy-basic.rd.corpintra.net:3128"; export http_proxy="http://APAC\kuvikra:Mbrdi12345@proxy-basic.rd.corpintra.net:3128"; export PATH="/home/abdeshp/richos1/build/tmp/sysroots-uninative/x86_64-linux/usr/bin:/home/abdeshp/richos1/build/tmp/work/cortexa78c-mbient-linux/titanium-ui/7.14.0+gitAUTOINC+57fca4179a-r0/recipe-sysroot-native/usr/bin//qt6:/home/abdeshp/richos1/sources/poky/scripts:/home/abdeshp/richos1/build/tmp/work/cortexa78c-mbient-linux/titanium-ui/7.14.0+gitAUTOINC+57fca4179a-r0/recipe-sysroot-native/usr/bin/aarch64-mbient-linux:/home/abdeshp/richos1/build/tmp/work/cortexa78c-mbient-linux/titanium-ui/7.14.0+gitAUTOINC+57fca4179a-r0/recipe-sysroot/usr/bin/crossscripts:/home/abdeshp/richos1/build/tmp/work/cortexa78c-mbient-linux/titanium-ui/7.14.0+gitAUTOINC+57fca4179a-r0/recipe-sysroot-native/usr/sbin:/home/abdeshp/richos1/build/tmp/work/cortexa78c-mbient-linux/titanium-ui/7.14.0+gitAUTOINC+57fca4179a-r0/recipe-sysroot-native/usr/bin:/home/abdeshp/richos1/build/tmp/work/cortexa78c-mbient-linux/titanium-ui/7.14.0+gitAUTOINC+57fca4179a-r0/recipe-sysroot-native/sbin:/home/abdeshp/richos1/build/tmp/work/cortexa78c-mbient-linux/titanium-ui/7.14.0+gitAUTOINC+57fca4179a-r0/recipe-sysroot-native/bin:/home/abdeshp/richos1/build/../sources/meta-mbient/meta-mbient-ui/scripts:/home/abdeshp/richos1/sources/poky/bitbake/bin:/home/abdeshp/richos1/build/tmp/hosttools"; export HOME="/home/abdeshp"; git -c core.fsyncobjectfiles=0 -c gc.autoDetach=false -c core.pager=cat checkout -B master 57fca4179ac6ffb266a654fb32199e283f2fefed failed with exit code 128, output:
-Downloading Assets/Core/LegacyScripts/Titanium/00_Core/02_CoreElements/Camera/Scripts/NavistancePlaceholderUI/Dimmer_full_view_step3_transparent.png (33 KB)
-Error downloading object: Assets/Core/LegacyScripts/Titanium/00_Core/02_CoreElements/Camera/Scripts/NavistancePlaceholderUI/Dimmer_full_view_step3_transparent.png (f3804d4): Smudge error: Error downloading Assets/Core/LegacyScripts/Titanium/00_Core/02_CoreElements/Camera/Scripts/NavistancePlaceholderUI/Dimmer_full_view_step3_transparent.png (f3804d4f12ec2d35403971d463d25896911d1dede09d7eef1de50a276a943454): batch response: Post https://oauth2:***@git.swf.daimler.com/apricot/titanium-ui.git/info/lfs/objects/batch: proxyconnect tcp: dial tcp: lookup http: Temporary failure in name resolution
+I am trying to login to azure blob named "pulumi" using pulumi cli in Ubuntu. 
+I run command - "pulumi login azblob://pulumi" in Ubuntu but not able to connect. 
+It is showing me - "problem logging in: read ".pulumi/meta.yaml": Get "https://analyticscommonpulumi.blob.core.windows.net/pulumi/.pulumi%2Fmeta.yaml": dial tcp 20.150.83.36:443: i/o timeout". 
+The same is what my colleague is trying to do but it is working fine for him. 
+I have attached the error also. Kindly have a look into it and solve it asap.
 
-Errors logged to /home/abdeshp/richos1/build/downloads/tmpdf457qdj/git/.git/lfs/logs/20240819T114739.773799585.log
-Use `git lfs logs last` to view the log.
-error: external filter 'git-lfs filter-process' failed
-fatal: Assets/Core/LegacyScripts/Titanium/00_Core/02_CoreElements/Camera/Scripts/NavistancePlaceholderUI/Dimmer_full_view_step3_transparent.png: smudge filter lfs failed
 
-ERROR: titanium-ui-7.14.0+gitAUTOINC+57fca4179a-r0 do_fetch: Bitbake Fetcher Error: FetchError('Unable to fetch URL from any source.', 'git://git@git.swf.daimler.com:7999/apricot/titanium-ui.git;protocol=ssh;branch=master;lfs=1')
-ERROR: Logfile of failure stored in: /home/abdeshp/richos1/build/tmp/work/cortexa78c-mbient-linux/titanium-ui/7.14.0+gitAUTOINC+57fca4179a-r0/temp/log.do_fetch.2608393
-ERROR: Task (/home/abdeshp/richos1/build/../sources/meta-mbient/meta-apricot/recipes-cranberry/titanium-ui/titanium-ui_git.bb:do_fetch) failed with exit code '1'
+Hardware Type  : Laptop/Desktop/VDI
+ 
+Official Contact Number : 9582082227
+ 
+Hostname : CGSCLXR79760861
+ 
+Serial Number : 5CG2185GYD
+ 
+Affected Application  : Pulumi
+ 
+Issue in Details   : When I am trying to login to azure blob using pulumi command -> "pulumi login azblob://pulumi", I am able to do so if connected with my phone's hotspot network. But, when I am trying to do the same using office network with/without Netskope ON, I am not able to login or the later command didn't work.

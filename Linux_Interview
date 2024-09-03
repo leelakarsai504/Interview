@@ -12,3 +12,22 @@ TCS :
 
 
 
+If the `df` command shows nothing, it could be due to several reasons. Here are some troubleshooting steps with commands to help you identify and resolve the issue:
+
+1. _Check if the command is correct_: Ensure you're typing the correct command, `df`, not `dfc` or `dfd`.
+
+2. _Check for disk issues_: Run `fdisk -l` or `lsblk` to verify disk presence and health.
+
+3. _Check mount points_: Run `mount` to ensure file systems are mounted correctly.
+
+4. _Check disk usage_: Run `du -sh /*` to check disk usage and identify potential issues.
+
+5. _Check system logs_: Run `dmesg | grep disk` or `dmesg | grep filesystem` to check for disk-related error messages.
+
+6. _Check if the disk is recognized_: Run `ls /dev/sd*` or `ls /dev/nvme*` to verify disk recognition.
+
+7. _Check for hardware issues_: Run `smartctl -a /dev/sda` (replace `/dev/sda` with your disk) to check for hardware errors.
+
+8. _Try a different command_: Run `lsblk` or `blkid` to list block devices and their mount points.
+
+If none of these steps resolve the issue, please provide more details about your system, disk configuration, and the exact error messages (if any). This will help me assist you further.

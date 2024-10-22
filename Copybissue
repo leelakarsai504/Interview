@@ -1,0 +1,28 @@
+If you’re unable to copy text between the VMware Horizon client and your Windows host, it might be due to clipboard sharing settings not being enabled or a configuration issue. Here are some steps to troubleshoot and resolve the issue:
+
+1. Check Clipboard Redirection Settings:
+
+	•	In VMware Horizon, clipboard redirection must be enabled for you to copy and paste between the client and host.
+	•	To check the settings:
+	•	Go to VMware Horizon Client > Settings.
+	•	Ensure that Clipboard Sharing is set to “Bidirectional” (or at least from Client to Guest, if you only need one-way sharing).
+
+2. Verify Group Policy Settings:
+
+	•	If the Horizon environment is managed by your organization, certain group policies might be blocking clipboard sharing.
+	•	To check this, ask your system administrator if clipboard redirection has been disabled via Group Policy settings.
+
+3. Check Horizon Agent Configuration:
+
+	•	The VMware Horizon Agent, installed on the virtual desktop, needs to have clipboard sharing enabled.
+	•	Make sure the agent is up to date and that clipboard sharing wasn’t disabled during the installation of the agent.
+
+4. Restart Horizon Client and Desktop:
+
+	•	Sometimes a simple restart can resolve connectivity or configuration issues. Close the VMware Horizon Client and restart both your host system and the virtual desktop.
+
+5. Update VMware Horizon Client:
+
+	•	Ensure you’re using the latest version of the VMware Horizon Client, as bugs related to clipboard sharing may have been fixed in newer releases.
+
+If these steps don’t resolve the issue, it may be helpful to contact your IT support team for further assistance, especially if you suspect any restrictions have been placed by the system administrators.

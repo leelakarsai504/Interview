@@ -1,0 +1,37 @@
+NFS-client 172.31.41.36
+NFS-server 172.31.37.123
+
+nfs - server port no : 2049
+RPC - 111
+NFS 4 only require 2049 while older versions
+
+ip(rw,sync,no_root_squash)
+
+rw                ----> rw
+sync              ----> synchronized
+no_root_squash   ----> 
+Enable root privileges
+no_all_squash    -----> Enables users' authority
+no_subtree_check ----->  disables subtree checking, which has mild security implications, but can improve reliability in some circumstances.
+
+mount -t nfs <ip_address>:/home/ec2-user/nfsshare /mnt/dir1
+
+mount -t nfs <ip_adress>:/home/ec2-user/nfsfare /mnt/dir1
+
+vi /etc/fstab
+
+ip:/home/ec2-user/nfsshare /mnt/dir1 nfs default 0 0 
+
+mount | grep auto.share
+=================
+Some more important commands for NFS.
+
+showmount -e – Shows the available shares on your local machine
+showmount -e ip-address – Lists the available shares at the remote server
+showmount -d – Lists all the sub-directories
+exportfs -v – Displays a list of shared files and options on a server
+exportfs -a – Exports all shares listed in /etc/exports, or given name
+exportfs -u – Unexports all shares listed in /etc/exports, or given name
+exportfs -r – Refresh the server’s list after modifying /etc/exports
+
+exportfs -rv

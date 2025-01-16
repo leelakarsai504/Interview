@@ -1,0 +1,101 @@
+To troubleshoot internet connectivity issues on your Raspberry Pi running Debian 12, follow these steps:
+
+1. Check Physical Connections
+	•	Ensure the Ethernet cable is properly connected if using a wired connection.
+	•	Verify the Wi-Fi adapter is plugged in if you’re using Wi-Fi (for older Raspberry Pi models).
+
+2. Check Network Configuration
+	•	Run the following commands to check network interfaces:
+
+ip a
+
+Look for eth0 (Ethernet) or wlan0 (Wi-Fi) and verify they have an IP address.
+
+	•	If no IP address is assigned, try restarting the network service:
+
+sudo systemctl restart networking
+
+3. Verify Gateway
+	•	Check the default gateway with:
+
+ip route
+
+Ensure there is a route to the gateway. If missing, add it manually (replace 192.168.1.1 with your gateway IP):
+
+sudo ip route add default via 192.168.1.1
+
+4. Test DNS
+	•	Test DNS resolution by pinging a domain name:
+
+ping google.com
+
+If this fails, try pinging an IP address like Google’s DNS server:
+
+ping 8.8.8.8
+
+If IP pings work but domain names fail, there’s a DNS issue.
+
+	•	Check the DNS configuration in /etc/resolv.conf:
+
+cat /etc/resolv.conf
+
+Ensure it contains a valid DNS server like:
+
+nameserver 8.8.8.8
+
+5. Verify Wi-Fi (if applicable)
+	•	Check if the Wi-Fi interface is active:
+
+sudo iwconfig
+
+
+	•	Ensure the Wi-Fi network is configured correctly in /etc/wpa_supplicant/wpa_supplicant.conf:
+
+sudo nano /etc/wpa_supplicant/wpa_supplicant.conf
+
+Add:
+
+network={
+    ssid="YourNetworkName"
+    psk="YourPassword"
+}
+
+
+	•	Restart the Wi-Fi service:
+
+sudo systemctl restart dhcpcd
+
+6. Check Firewall or Proxy
+	•	If you’re behind a corporate network or proxy, ensure the proxy settings are configured.
+	•	Check if iptables is blocking traffic:
+
+sudo iptables -L
+
+7. Update System
+	•	Ensure your Raspberry Pi is up to date:
+
+sudo apt update && sudo apt upgrade -y
+
+8. Reboot and Test
+	•	Reboot the system:
+
+sudo reboot
+
+
+	•	Test the connection again:
+
+curl -I http://google.com
+
+9. Advanced Troubleshooting
+	•	Use dmesg to check for hardware or driver-related errors:
+
+dmesg | grep -i network
+
+
+	•	Use journalctl for logs:
+
+journalctl -u networking
+
+
+
+Let me know if you need help with any step!
